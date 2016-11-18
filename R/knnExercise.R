@@ -1,6 +1,7 @@
 library(lattice)
 library(ggplot2)
 library(caret)
+library(doParallel)
 
 # Normalization of the values
 normalize = function(x) {
@@ -39,11 +40,11 @@ ctrl = trainControl(method = "repeatedcv", repeats = 5)
 # List of all possible models
 # http://topepo.github.io/caret/train-models-by-tag.html
 tuneLengthVar = 3
-knn = train(Class ~ ., data = dfTrain, method="rf", trControl = ctrl, tuneLength = tuneLengthVar)
+knn = train(Class ~ ., data = dfTrain, method="knn", trControl = ctrl, tuneLength = tuneLengthVar)
 knn
-
+plot(knn)
 # http://topepo.github.io/caret/train-models-by-tag.html
-# Search after: method = 'rf' (Random Forest)
+# Search after: method = 'knn' (Random Forest)
 # Tuning parameters:
 # mtry (#Randomly Selected Predictors)
 
@@ -61,8 +62,9 @@ dfTestN$Class = veh[-training, 19]
 dfTrainN
 dfTestN
 
-knn.n = train(Class ~ ., data = dfTrainN, method="rf", trControl = ctrl, tuneLength = tuneLengthVar)
+knn.n = train(Class ~ ., data = dfTrainN, method="knn", trControl = ctrl, tuneLength = tuneLengthVar)
 knn.n
+plot(knn.n)
 
 # z-Transformation
 dfTrainZ = as.data.frame(scale(dfTrain[-19]))
@@ -72,7 +74,7 @@ dfTestZ$Class = veh[-training, 19]
 dfTrainZ
 dfTestZ
 
-knn.z = train(Class ~ ., data = dfTrainN, method="rf", trControl = ctrl, tuneLength = tuneLengthVar)
+knn.z = train(Class ~ ., data = dfTrainN, method="knn", trControl = ctrl, tuneLength = tuneLengthVar)
 knn.z
 
 # What does pre-process mean?
