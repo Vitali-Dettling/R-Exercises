@@ -4,3 +4,6 @@
 .Ruserdata
 DataSet.RData
 RTraining.Rproj
+
+# Customised
+.~*
