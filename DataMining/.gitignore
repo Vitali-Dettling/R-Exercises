@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+DataSet.RData
+RTraining.Rproj
+
+# Customised
+.*
